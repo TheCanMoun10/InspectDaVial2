@@ -1,0 +1,9 @@
+﻿  Source.cpp
+C:\Users\andre\source\repos\VialProcessingV3\Source.cpp(83,24): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\andre\source\repos\VialProcessingV3\Source.cpp(84,27): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\andre\source\repos\VialProcessingV3\Source.cpp(85,40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\andre\source\repos\VialProcessingV3\Source.cpp(187,24): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\andre\source\repos\VialProcessingV3\Source.cpp(188,27): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\andre\source\repos\VialProcessingV3\Source.cpp(189,40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\andre\source\repos\VialProcessingV3\Source.cpp(232,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  VialProcessingV3.vcxproj -> C:\Users\andre\source\repos\VialProcessingV3\x64\Debug\VialProcessingV3.exe
