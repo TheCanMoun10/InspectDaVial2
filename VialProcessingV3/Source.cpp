@@ -34,8 +34,11 @@ void Good()
 	Mat vial_Blur = Mat(vial_ROI.size(), CV_8U);
 	Mat vial_Subt = Mat(vial_ROI.size(), CV_8U);
 	Mat vial_Thresh = Mat(vial_ROI.size(), CV_8U);
-	Mat ContourIMG = Mat(vial_ROI.size(), CV_8U);
+	Mat Contour = Mat(vial_ROI.size(), CV_8U, Scalar(255,255,255));
+	Mat ContourIMG = Mat(vial_ROI.size(), CV_8U, Scalar(255, 255, 255));
 
+
+	
 
 	//Thresholding:
 	medianBlur(vial_ROI, vial_Blur, 41); //Blurring image to get rid of uneven lighting.
@@ -68,6 +71,7 @@ void Good()
 	vector<Vec4i> hierarchy;
 
 	findContours(vial_morph4, Gcontours, hierarchy, RETR_TREE, CHAIN_APPROX_NONE);
+	drawContours(Contour, Gcontours, -1, Scalar(0, 0, 0), 1);
 
 	vector<Vialfeatures> featVec;
 
@@ -118,8 +122,8 @@ void Good()
 	//imshow("Original Image", vial);
 	//imshow("Background", vial_Subt);
 	imshow("Region of Interest", vial_ROI);
-	imshow("Threshold", vial_Thresh);
-	imshow("Morphology", vial_morph4);
+	//imshow("Threshold", vial_Thresh);
+	//imshow("Morphology", vial_morph4);
 	imshow("Contours", ContourIMG);
 }
 
@@ -141,7 +145,8 @@ void Bad()
 	Mat vial_BlurBad = Mat(BadVial_ROI.size(), CV_8U);
 	Mat vial_SubtBad = Mat(BadVial_ROI.size(), CV_8U);
 	Mat vial_ThreshBad = Mat(BadVial_ROI.size(), CV_8U);
-	Mat ContourIMGBad = Mat(BadVial_ROI.size(), CV_8U);
+	Mat ContourBad = Mat(BadVial_ROI.size(), CV_8U, Scalar(255,255,255));
+	Mat ContourIMGBad = Mat(BadVial_ROI.size(), CV_8UC3, Scalar(255, 255, 255));
 
 
 	//Thresholding:
@@ -172,6 +177,7 @@ void Bad()
 	vector<Vec4i> Bhierarchy;
 
 	findContours(Badvial_morph3, Bcontours, Bhierarchy, RETR_TREE, CHAIN_APPROX_NONE);
+	drawContours(ContourBad, Bcontours, -1, Scalar(0, 0, 0), 1);
 
 	vector<Vialfeatures> BfeatVec;
 
@@ -200,30 +206,34 @@ void Bad()
 
 	for (int i = 0; i < BfeatVec.size(); i++)
 	{
-		if (BfeatVec[i].area < 5000)
+		if (BfeatVec[i].area > 2500)
 		{
-			drawContours(ContourIMGBad, Bcontours, BfeatVec[i].contourIndex, Scalar(0, 150, 0), 1);
+			drawContours(ContourIMGBad, Bcontours, BfeatVec[i].contourIndex, Scalar(0, 0, 0), 1);
+			cout << "Detected Vial";
 		}
 
-		if (BfeatVec[i].elongation > 1000)
+		if (BfeatVec[i].perimeter < 30 || BfeatVec[i].perimeter < 400)
 		{
-			drawContours(ContourIMGBad, Bcontours, BfeatVec[i].contourIndex, Scalar(255, 0, 0), 1);
+			drawContours(ContourIMGBad, Bcontours, BfeatVec[i].contourIndex, Scalar(0, 0, 255), 1);
+			cout << "Defects highlighted red \n";
 		}
 
-		if (BfeatVec[i].area < 10000 && BfeatVec[i].hasCrack == true)
+		/*
+		if (BfeatVec[i].circularity > 0.4 && BfeatVec[i].perimeter < 30)
 		{
-			drawContours(ContourIMGBad, Bcontours, BfeatVec[i].contourIndex, Scalar(255, 255, 0), 1);
+			drawContours(ContourIMGBad, Bcontours, BfeatVec[i].contourIndex, Scalar(0, 0, 255), 1);
 		}
-
+		*/
 	}
 
 	//Results Bad Vial:
 	//imshow("Bad Vial -Original", BadVial);
 	imshow("Bad Vial - Region of Interest", BadVial_ROI);
-	imshow("Bad Vial - Threshold", vial_ThreshBad);
-	imshow("Bad Vial - Morphology", Badvial_morph3);
+	//imshow("Bad Vial - Threshold", vial_ThreshBad);
+	//imshow("Bad Vial - Morphology", Badvial_morph3);
+	//imshow(Bad  )
 	imshow("Bad Vial - Contours", ContourIMGBad);
-	imshow("Background - Bad", vial_SubtBad);
+	//imshow("Background - Bad", vial_SubtBad);
 
 
 }
