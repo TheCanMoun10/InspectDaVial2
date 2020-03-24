@@ -20,7 +20,7 @@ struct Vialfeatures
 void Good()
 {
 	//Load the Image needed:
-	Mat vial = imread("C:\\Users\\andre\\OneDrive\\Skrivebord\\ProjectRelated\\VialsForProject\\DarkRoomVial.png"); //Location of the files (C://Users//...//VialsForProject//xx.png
+	Mat vial = imread("C:\\Users\\...\\VialsForProject\\DarkRoomVial.png"); //Location of the files (C://Users//...//VialsForProject//xx.png
 
 	if (vial.empty()) cout << "Failed loading image" << endl;
 	else cout << "Image Loaded succesfully" << endl;
@@ -129,7 +129,7 @@ void Good()
 
 void Bad()
 {
-	Mat BadVial = imread("C:\\Users\\andre\\OneDrive\\Skrivebord\\ProjectRelated\\VialsForProject\\DarkRoomCrack.png");
+	Mat BadVial = imread("C:\\Users\\...\\VialsForProject\\DarkRoomCrack.png");
 
 
 
